@@ -20,6 +20,19 @@ interface EventItem {
   image: string
 }
 
+interface ScheduleEvent {
+  time: string
+  title: string
+  description: string
+  image: string
+}
+
+interface DressCodeSlide {
+  title: string
+  description: string
+  image: string
+}
+
 const eventItems: EventItem[] = [
   {
     id: 1,
@@ -47,7 +60,7 @@ const eventItems: EventItem[] = [
   }
 ]
 
-const scheduleEvents = [
+const scheduleEvents: ScheduleEvent[] = [
   {
     time: "12:00 PM",
     title: "Welcome & Arrival",
@@ -86,7 +99,7 @@ const scheduleEvents = [
   }
 ]
 
-const dressCodeSlides = [
+const dressCodeSlides: DressCodeSlide[] = [
   {
     title: "Formal Elegance",
     description: "Floor-length gowns, cocktail dresses, or formal traditional attire for ladies. Dark suits or tuxedos for gentlemen.",
@@ -106,10 +119,10 @@ const dressCodeSlides = [
 
 export default function News() {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null)
-  const [activeSlide, setActiveSlide] = useState(0)
-  const modalRef = useRef<HTMLDivElement>(null)
-  const carouselInterval = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
-  const heroRef = useRef<HTMLDivElement>(null)
+  const [activeSlide, setActiveSlide] = useState<number>(0)
+  const modalRef = useRef<HTMLDivElement | null>(null)
+  const carouselInterval = useRef<ReturnType<typeof setInterval> | null>(null)
+  const heroRef = useRef<HTMLDivElement | null>(null)
   const { scrollY } = useScroll({})
   
   const y = useTransform(
@@ -122,7 +135,7 @@ export default function News() {
   // Auto-rotate carousel
   useEffect(() => {
     carouselInterval.current = setInterval(() => {
-      setActiveSlide((current) => (current + 1) % dressCodeSlides.length)
+      setActiveSlide((current: number) => (current + 1) % dressCodeSlides.length)
     }, 4000)
 
     return () => {
@@ -133,27 +146,25 @@ export default function News() {
   }, [dressCodeSlides.length])
 
   useEffect(() => {
-    if (modalRef.current) {
-      const handleOutsideClick = (event: MouseEvent) => {
-        setSelectedEvent(null);
-      };
-      
-      const listener = (event: any) => {
-        if (!modalRef.current || modalRef.current.contains(event.target)) {
-          return;
-        }
-        handleOutsideClick(event);
-      };
-      
-      document.addEventListener("mousedown", listener);
-      document.addEventListener("touchstart", listener);
-      
-      return () => {
-        document.removeEventListener("mousedown", listener);
-        document.removeEventListener("touchstart", listener);
-      };
-    }
-  }, [modalRef]);
+    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+      setSelectedEvent(null);
+    };
+    
+    const listener = (event: MouseEvent | TouchEvent) => {
+      if (!modalRef.current || modalRef.current.contains(event.target as Node)) {
+        return;
+      }
+      handleOutsideClick(event);
+    };
+
+    document.addEventListener('mousedown', listener as EventListener);
+    document.addEventListener('touchstart', listener as EventListener);
+
+    return () => {
+      document.removeEventListener('mousedown', listener as EventListener);
+      document.removeEventListener('touchstart', listener as EventListener);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-white">

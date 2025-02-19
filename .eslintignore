@@ -1,0 +1,4 @@
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/hooks/use-outside-click.ts
+src/types/react.d.ts

@@ -1,10 +1,13 @@
 'use client'
+
+import React from 'react'
+import { motion, useScroll, useTransform, easeOut } from 'framer-motion'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
-import { motion, useScroll, useTransform, easeOut } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { greatVibes, playfairDisplay, montserrat, printsCharming, darlineScript, sail } from '@/fonts/fonts'
 import dynamic from 'next/dynamic'
+import Footer from '@/components/Footer'
 
 // Dynamically import heavy components
 const TextGenerateEffect = dynamic(() => import('@/components/ui/text-generate-effect'), { ssr: false })
@@ -17,7 +20,6 @@ const CountdownTimer = dynamic(() => import('@/components/ui/CountdownTimer'), {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { IconBrandInstagram, IconMail, IconBrandWhatsapp } from '@tabler/icons-react'
-import Footer from '@/components/Footer'
 import Link from 'next/link';
 
 export default function Home() {
@@ -268,7 +270,7 @@ export default function Home() {
                 <motion.div
                   variants={textVariants}
                 >
-                  <span className={greatVibes.className}>Kuna</span> <span className="text-wedding-primary font-playfair-display">&</span> <span className={greatVibes.className}>Maximilian</span>
+                  <span className={greatVibes.className}>Kuna</span> <span className={`${playfairDisplay.className} text-wedding-primary`}>&</span> <span className={greatVibes.className}>Maximilian</span>
                 </motion.div>
               </div>
               <div className="mt-[16px] text-center font-montserrat text-[25px] font-normal leading-none">
@@ -378,7 +380,7 @@ export default function Home() {
               {/* Ceremony & Reception Info */}
               <div className="max-w-4xl mx-auto mt-32 text-center">
                 {/* Names */}
-                <h2 className="font-playfair-display text-[45px] text-wedding-text-dark tracking-wider">
+                <h2 className={`${playfairDisplay.className} text-[45px] text-wedding-text-dark tracking-wider`}>
                   Kuna <span className="text-wedding-primary">&</span> Maximilian
                 </h2>
 
@@ -389,7 +391,7 @@ export default function Home() {
                     <h3 className="font-montserrat text-gray-500 text-lg">
                       Ceremony
                     </h3>
-                    <div className="font-playfair-display text-[55px] text-wedding-text-dark mt-[16px] font-medium">
+                    <div className={`${playfairDisplay.className} text-[55px] text-wedding-text-dark mt-[16px] font-medium`}>
                       09.00 am
                     </div>
                     <p className="font-montserrat text-gray-500 mt-[16px] leading-relaxed">
@@ -406,7 +408,7 @@ export default function Home() {
                     <h3 className="font-montserrat text-gray-500 text-lg">
                       Reception
                     </h3>
-                    <div className="font-playfair-display text-[55px] text-wedding-text-dark mt-[16px] font-medium">
+                    <div className={`${playfairDisplay.className} text-[55px] text-wedding-text-dark mt-[16px] font-medium`}>
                       11.00 am
                     </div>
                     <p className="font-montserrat text-gray-500 mt-[16px] leading-relaxed">
