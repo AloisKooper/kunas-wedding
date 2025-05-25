@@ -16,6 +16,19 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   const [selected, setSelected] = useState<Card | null>(null);
   const [lastSelected, setLastSelected] = useState<Card | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleClick = (card: Card) => {
     setLastSelected(selected);
@@ -26,9 +39,21 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
     setLastSelected(selected);
     setSelected(null);
   };
+  
+  // Handle escape key to close selected card
+  useEffect(() => {
+    const handleEscKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selected) {
+        handleOutsideClick();
+      }
+    };
+    
+    window.addEventListener('keydown', handleEscKey);
+    return () => window.removeEventListener('keydown', handleEscKey);
+  }, [selected]);
 
   return (
-    <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-4 relative">
+    <div ref={containerRef} className="w-full h-full p-2 sm:p-4 md:p-10 grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto gap-2 sm:gap-4 relative">
       {cards.map((card, i) => (
         <div key={i} className={cn(card.className, "")}>
           <motion.div
@@ -39,7 +64,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
               card.className,
               "relative overflow-hidden group",
               selected?.id === card.id
-                ? "rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                ? "rounded-lg cursor-pointer fixed inset-0 h-auto w-[85%] max-h-[60vh] md:max-h-[90vh] md:absolute md:h-auto md:w-[80%] md:max-w-2xl left-0 right-0 top-0 bottom-0 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                 : lastSelected?.id === card.id
                 ? "z-40 bg-white rounded-xl h-full w-full"
                 : "bg-white rounded-xl h-full w-full"
@@ -76,10 +101,10 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
       <motion.div
         onClick={handleOutsideClick}
         className={cn(
-          "absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10",
+          "fixed inset-0 bg-black opacity-0 z-10",
           selected?.id ? "pointer-events-auto" : "pointer-events-none"
         )}
-        animate={{ opacity: selected?.id ? 0.3 : 0 }}
+        animate={{ opacity: selected?.id ? 0.6 : 0 }}
       />
     </div>
   );
@@ -87,23 +112,34 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 
 const ImageComponent = ({ card, isHovered }: { card: Card; isHovered: boolean }) => {
   return (
-    <motion.img
+    <motion.div
       layoutId={`image-${card.id}-image`}
-      src={card.thumbnail}
-      height="500"
-      width="500"
-      className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition-transform duration-300",
-        isHovered && "scale-105"
-      )}
-      alt="thumbnail"
-    />
+      className="absolute inset-0 h-full w-full"
+    >
+      <Image
+        src={card.thumbnail}
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className={cn(
+          "object-cover object-top transition-transform duration-300",
+          isHovered && "scale-105"
+        )}
+        alt="thumbnail"
+        priority={card.id < 3} // Prioritize loading first few images
+      />
+    </motion.div>
   );
 };
 
 const SelectedCard = ({ selected }: { selected: Card | null }) => {
+  // Add a ref for handling click outside
+  const cardRef = useRef<HTMLDivElement>(null);
+  
   return (
-    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
+    <div 
+      ref={cardRef}
+      className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-[60] overflow-hidden"
+    >
       <motion.div
         initial={{
           opacity: 0,
@@ -131,7 +167,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="relative px-8 pb-4 z-[70]"
+        className="relative px-4 md:px-8 py-4 z-[70] max-h-[40vh] md:max-h-[70vh] overflow-auto"
       >
         {selected?.content}
       </motion.div>

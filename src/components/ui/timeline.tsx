@@ -114,7 +114,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover"
+                    className={`object-cover ${index === 0 ? 'object-top' : ''}`}
                   />
                 </motion.div>
               )}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="120" viewBox="0 0 1200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main horizontal branch -->
+  <path d="M100 60 H1100" stroke="#8B5A2B" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Left side branches and leaves -->
+  <path d="M200 60 C180 40, 160 30, 140 40" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M140 40 C130 30, 120 25, 110 30" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M110 30 C105 25, 100 23, 95 25" stroke="#8B5A2B" stroke-width="1" stroke-linecap="round"/>
+  <path d="M140 40 C145 35, 150 30, 155 35" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <path d="M300 60 C280 45, 260 40, 240 50" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M240 50 C230 45, 220 43, 215 48" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M240 50 C245 40, 250 35, 255 38" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <path d="M400 60 C380 30, 360 20, 340 35" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M340 35 C330 25, 320 20, 310 25" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M340 35 C345 25, 350 20, 355 25" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Right side branches and leaves -->
+  <path d="M800 60 C820 40, 840 30, 860 40" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M860 40 C870 30, 880 25, 890 30" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M890 30 C895 25, 900 23, 905 25" stroke="#8B5A2B" stroke-width="1" stroke-linecap="round"/>
+  <path d="M860 40 C855 35, 850 30, 845 35" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <path d="M900 60 C920 45, 940 40, 960 50" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M960 50 C970 45, 980 43, 985 48" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M960 50 C955 40, 950 35, 945 38" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <path d="M1000 60 C1020 30, 1040 20, 1060 35" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M1060 35 C1070 25, 1080 20, 1090 25" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M1060 35 C1055 25, 1050 20, 1045 25" stroke="#8B5A2B" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Flowers and decorative elements -->
+  <!-- Left side flowers -->
+  <circle cx="95" cy="25" r="5" fill="#F8C8DC"/>
+  <circle cx="100" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="90" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="95" cy="20" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="155" cy="35" r="5" fill="#F8C8DC"/>
+  <circle cx="160" cy="32" r="4" fill="#F8C8DC"/>
+  <circle cx="150" cy="32" r="4" fill="#F8C8DC"/>
+  <circle cx="155" cy="30" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="215" cy="48" r="5" fill="#F8C8DC"/>
+  <circle cx="220" cy="45" r="4" fill="#F8C8DC"/>
+  <circle cx="210" cy="45" r="4" fill="#F8C8DC"/>
+  <circle cx="215" cy="43" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="255" cy="38" r="5" fill="#F8C8DC"/>
+  <circle cx="260" cy="35" r="4" fill="#F8C8DC"/>
+  <circle cx="250" cy="35" r="4" fill="#F8C8DC"/>
+  <circle cx="255" cy="33" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="310" cy="25" r="5" fill="#F8C8DC"/>
+  <circle cx="315" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="305" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="310" cy="20" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="355" cy="25" r="5" fill="#F8C8DC"/>
+  <circle cx="360" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="350" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="355" cy="20" r="3" fill="#FFFFFF"/>
+  
+  <!-- Right side flowers -->
+  <circle cx="905" cy="25" r="5" fill="#F8C8DC"/>
+  <circle cx="910" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="900" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="905" cy="20" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="845" cy="35" r="5" fill="#F8C8DC"/>
+  <circle cx="840" cy="32" r="4" fill="#F8C8DC"/>
+  <circle cx="850" cy="32" r="4" fill="#F8C8DC"/>
+  <circle cx="845" cy="30" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="985" cy="48" r="5" fill="#F8C8DC"/>
+  <circle cx="980" cy="45" r="4" fill="#F8C8DC"/>
+  <circle cx="990" cy="45" r="4" fill="#F8C8DC"/>
+  <circle cx="985" cy="43" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="945" cy="38" r="5" fill="#F8C8DC"/>
+  <circle cx="940" cy="35" r="4" fill="#F8C8DC"/>
+  <circle cx="950" cy="35" r="4" fill="#F8C8DC"/>
+  <circle cx="945" cy="33" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="1090" cy="25" r="5" fill="#F8C8DC"/>
+  <circle cx="1085" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="1095" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="1090" cy="20" r="3" fill="#FFFFFF"/>
+  
+  <circle cx="1045" cy="25" r="5" fill="#F8C8DC"/>
+  <circle cx="1040" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="1050" cy="22" r="4" fill="#F8C8DC"/>
+  <circle cx="1045" cy="20" r="3" fill="#FFFFFF"/>
+  
+  <!-- Center decorative element -->
+  <circle cx="600" cy="60" r="8" fill="#F8C8DC"/>
+  <circle cx="600" cy="60" r="6" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="600" cy="60" r="4" fill="#F8C8DC"/>
+  <circle cx="600" cy="60" r="2" fill="#FFFFFF"/>
+  
+  <!-- Additional small flowers scattered -->
+  <circle cx="450" cy="55" r="3" fill="#F8C8DC"/>
+  <circle cx="450" cy="55" r="1.5" fill="#FFFFFF"/>
+  
+  <circle cx="500" cy="65" r="3" fill="#F8C8DC"/>
+  <circle cx="500" cy="65" r="1.5" fill="#FFFFFF"/>
+  
+  <circle cx="550" cy="55" r="3" fill="#F8C8DC"/>
+  <circle cx="550" cy="55" r="1.5" fill="#FFFFFF"/>
+  
+  <circle cx="650" cy="55" r="3" fill="#F8C8DC"/>
+  <circle cx="650" cy="55" r="1.5" fill="#FFFFFF"/>
+  
+  <circle cx="700" cy="65" r="3" fill="#F8C8DC"/>
+  <circle cx="700" cy="65" r="1.5" fill="#FFFFFF"/>
+  
+  <circle cx="750" cy="55" r="3" fill="#F8C8DC"/>
+  <circle cx="750" cy="55" r="1.5" fill="#FFFFFF"/>
+</svg>

@@ -17,7 +17,7 @@ export default function Footer() {
           alt="Decorative Left Flower"
           width={200}
           height={200}
-          className="opacity-50"
+          className="w-[100px] h-[100px] xs:w-[120px] xs:h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] opacity-50"
           priority
           style={{ transform: 'rotate(45deg)' }}
         />
@@ -31,7 +31,7 @@ export default function Footer() {
           alt="Decorative Right Flower"
           width={200}
           height={200}
-          className="opacity-50"
+          className="w-[100px] h-[100px] xs:w-[120px] xs:h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] opacity-50"
           priority
           style={{ transform: 'rotate(-35deg) scaleX(-1)' }}
         />
@@ -39,7 +39,7 @@ export default function Footer() {
 
       {/* Decorative Top Border */}
       <div className="absolute top-0 left-0 right-0 flex justify-center">
-        <div className="flex space-x-4 pt-10">
+        <div className="flex space-x-2 sm:space-x-3 md:space-x-4 pt-6 sm:pt-8 md:pt-10">
           {[...Array(5)].map((_, i) => (
             <Image
               key={i}
@@ -47,7 +47,7 @@ export default function Footer() {
               alt="Decorative Flower"
               width={40}
               height={40}
-              className="opacity-50"
+              className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px] md:w-[40px] md:h-[40px] opacity-50"
             />
           ))}
         </div>
@@ -78,7 +78,7 @@ export default function Footer() {
                   stroke={1.5}
                 />
               </a>
-              <a href="mailto:contact@kunaandmax.com"
+              <a href="mailto:contact@kunaandkadeen.com"
                  className="w-10 h-10 rounded-full border border-wedding-primary flex items-center justify-center hover:bg-wedding-primary group transition-all duration-300">
                 <IconMail 
                   className="w-5 h-5 text-wedding-primary group-hover:text-white transition-colors" 
@@ -106,7 +106,7 @@ export default function Footer() {
               viewport={{ once: true }}
             >
               <h2 className={`${greatVibes.className} text-[65px] text-wedding-text-dark`}>
-                Kuna <span className="text-wedding-primary font-playfair-display">&</span> Maximilian
+                Kuna <span className="text-wedding-primary font-playfair-display">&</span> Kadeen
               </h2>
               <div className="flex justify-center">
                 <Image
@@ -114,7 +114,7 @@ export default function Footer() {
                   alt="Decorative Flower"
                   width={60}
                   height={20}
-                  className="opacity-80"
+                  className="w-[40px] h-[14px] sm:w-[50px] sm:h-[17px] md:w-[60px] md:h-[20px] opacity-80"
                 />
               </div>
               <p className="text-wedding-text-dark text-center">
@@ -153,7 +153,7 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className={`${montserrat.className} text-sm text-gray-600`}>
-              2025 Kuna & Maximilian. All rights reserved.
+              2025 Kuna & Kadeen. All rights reserved.
             </p>
             <div className="flex items-center space-x-2">
               <span className={`${montserrat.className} text-sm text-gray-600`}>Made with</span>

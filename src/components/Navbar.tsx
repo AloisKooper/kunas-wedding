@@ -94,7 +94,7 @@ export default function Navbar() {
         }`}>
           <span className="font-semibold italic">K</span>
           <span className="text-wedding-primary font-semibold italic">&</span>
-          <span className="font-semibold italic">M</span>
+          <span className="font-semibold italic">K</span>
         </div>
 
         {/* Desktop Menu */}

@@ -2,6 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { greatVibes, montserrat } from '@/fonts/fonts'
+import { motion } from 'framer-motion'
+
+type TimeUnit = {
+  value: number;
+  label: string;
+};
 
 export default function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({
@@ -38,24 +44,60 @@ export default function CountdownTimer() {
     return () => clearInterval(timer);
   }, []);
 
+  const timeUnits: TimeUnit[] = [
+    { value: timeLeft.days, label: 'Days' },
+    { value: timeLeft.hours, label: 'Hours' },
+    { value: timeLeft.minutes, label: 'Minutes' },
+    { value: timeLeft.seconds, label: 'Seconds' }
+  ];
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
-    <div className="grid grid-cols-4 gap-48 max-w-[1600px] mx-auto px-8">
-      <div className="text-center">
-        <div className={`${greatVibes.className} font-bold mb-2`} style={{ fontSize: '108px', lineHeight: '1' }}>{timeLeft.days}</div>
-        <div className={`${montserrat.className} text-xl uppercase tracking-[0.15em]`}>Days</div>
-      </div>
-      <div className="text-center">
-        <div className={`${greatVibes.className} font-bold mb-2`} style={{ fontSize: '108px', lineHeight: '1' }}>{timeLeft.hours}</div>
-        <div className={`${montserrat.className} text-xl uppercase tracking-[0.15em]`}>Hours</div>
-      </div>
-      <div className="text-center">
-        <div className={`${greatVibes.className} font-bold mb-2`} style={{ fontSize: '108px', lineHeight: '1' }}>{timeLeft.minutes}</div>
-        <div className={`${montserrat.className} text-xl uppercase tracking-[0.15em]`}>Minutes</div>
-      </div>
-      <div className="text-center">
-        <div className={`${greatVibes.className} font-bold mb-2`} style={{ fontSize: '108px', lineHeight: '1' }}>{timeLeft.seconds}</div>
-        <div className={`${montserrat.className} text-xl uppercase tracking-[0.15em]`}>Seconds</div>
-      </div>
-    </div>
+    <motion.div 
+      className="flex flex-wrap justify-center w-full max-w-5xl mx-auto px-2 sm:px-4"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {timeUnits.map((unit, index) => (
+        <motion.div 
+          key={unit.label}
+          className="w-[45%] sm:w-[22%] px-1 sm:px-3 mb-4 sm:mb-0"
+          variants={itemVariants}
+        >
+          <div className="bg-black/30 backdrop-blur-sm rounded-lg p-2 sm:p-4 border border-white/10 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <div className={`${greatVibes.className} font-bold text-5xl xs:text-6xl sm:text-7xl md:text-8xl leading-none text-white`}>
+              {unit.value < 10 ? `0${unit.value}` : unit.value}
+            </div>
+            <div className={`${montserrat.className} text-sm sm:text-base md:text-xl uppercase tracking-wider text-wedding-primary mt-1 sm:mt-2`}>
+              {unit.label}
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
   );
 }

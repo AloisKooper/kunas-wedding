@@ -10,6 +10,8 @@ import { IconMusic, IconGlass, IconBabyCarriage, IconHanger, IconInfoCircle } fr
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient'
+import { VenueInformation } from '@/components/ui/venue-information'
+import { FAQSection } from '@/components/ui/faq-section'
 
 interface EventItem {
   id: number
@@ -174,7 +176,7 @@ export default function News() {
       <div ref={heroRef} className="relative h-[70vh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/kuna19.jpg"
+            src="/Wedding09.jpg"
             alt="Wedding News Hero"
             fill
             className="object-cover"
@@ -203,24 +205,96 @@ export default function News() {
       </div>
 
       {/* Entertainment Section */}
-      <section className="py-32 bg-wedding-section-light">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="py-32 bg-wedding-section-light relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-32 h-32 opacity-10">
+          <Image
+            src="/Flower.svg"
+            alt="Decorative Element"
+            width={128}
+            height={128}
+            className="object-contain"
+          />
+        </div>
+        <div className="absolute bottom-0 right-0 w-48 h-48 opacity-10 transform rotate-180">
+          <Image
+            src="/Flower.svg"
+            alt="Decorative Element"
+            width={192}
+            height={192}
+            className="object-contain"
+          />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className={`${greatVibes.className} text-5xl md:text-6xl text-wedding-text-dark mb-6`}>
-              Entertainment & Activities
-            </h2>
-            <p className={`${montserrat.className} text-wedding-primary text-lg max-w-2xl mx-auto`}>
-              A day filled with joy, love, and unforgettable moments
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className={`${greatVibes.className} text-5xl md:text-6xl text-wedding-text-dark mb-6`}>
+                Entertainment & Activities
+              </h2>
+              <p className={`${montserrat.className} text-wedding-primary text-lg max-w-2xl mx-auto`}>
+                A day filled with joy, love, and unforgettable moments
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Featured Entertainment */}
+          <div className="mb-20">
+            <div className="relative rounded-xl overflow-hidden shadow-xl">
+              <div className="aspect-[21/9] relative">
+                <Image
+                  src="/kuna18.jpg"
+                  alt="Featured Entertainment"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              </div>
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="max-w-2xl"
+                >
+                  <h3 className={`${playfairDisplay.className} text-white text-3xl md:text-4xl mb-4`}>
+                    A Celebration Like No Other
+                  </h3>
+                  <p className={`${montserrat.className} text-white/90 text-base md:text-lg mb-6`}>
+                    We've curated a selection of extraordinary entertainment to make our wedding day truly unforgettable. From South African DJs to a luxurious hookah lounge and dedicated children's entertainment, there's something for everyone to enjoy.
+                  </p>
+                  <button 
+                    onClick={() => setSelectedEvent(eventItems[0])}
+                    className={`${montserrat.className} px-6 py-3 bg-wedding-primary text-white rounded-lg hover:bg-opacity-90 transition-colors inline-flex items-center gap-2`}
+                  >
+                    Explore Entertainment
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                  </button>
+                </motion.div>
+              </div>
+            </div>
           </div>
 
           {/* Event Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-            {eventItems.map((event) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {eventItems.map((event, index) => (
               <motion.div
                 key={event.id}
-                className="group relative bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
-                whileHover={{ y: -5 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                 onClick={() => setSelectedEvent(event)}
               >
                 <div className="relative h-64">
@@ -228,76 +302,78 @@ export default function News() {
                     src={event.image}
                     alt={event.title}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10 opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute top-4 left-4 bg-wedding-primary/90 text-white p-2 rounded-full">
+                    {event.icon}
+                  </div>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    {event.icon}
                     <span className={`${montserrat.className} text-wedding-primary font-medium`}>
                       {event.time}
                     </span>
                   </div>
-                  <h3 className={`${playfairDisplay.className} text-xl text-wedding-text-dark mb-2`}>
+                  <h3 className={`${playfairDisplay.className} text-xl text-wedding-text-dark mb-3 group-hover:text-wedding-primary transition-colors`}>
                     {event.title}
                   </h3>
                   <p className={`${montserrat.className} text-gray-600 text-sm line-clamp-2`}>
                     {event.description}
                   </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Wedding Day Schedule Section */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="text-center mb-20">
-            <h2 className={`${greatVibes.className} text-5xl md:text-6xl text-wedding-text-dark mb-6`}>
-              Wedding Day Schedule
-            </h2>
-            <p className={`${montserrat.className} text-wedding-primary text-lg max-w-2xl mx-auto`}>
-              Join us for a day of celebration and love
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {scheduleEvents.map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden"
-              >
-                <div className="aspect-[4/3] relative rounded-lg overflow-hidden mb-6">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className={`${montserrat.className} text-white/90 font-light text-sm tracking-wider mb-2`}>
-                      {event.time}
-                    </div>
-                    <h3 className={`${playfairDisplay.className} text-white text-2xl mb-2`}>
-                      {event.title}
-                    </h3>
-                    <p className={`${montserrat.className} text-white/80 text-sm transform translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100`}>
-                      {event.description}
-                    </p>
+                  <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
+                    <span className={`${montserrat.className} text-wedding-primary text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity`}>
+                      Learn More
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m9 18 6-6-6-6"></path>
+                      </svg>
+                    </span>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+          
+          {/* Testimonial */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="bg-white p-8 rounded-xl shadow-lg max-w-3xl mx-auto text-center"
+          >
+            <div className="mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-wedding-primary/20 mx-auto">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+            </div>
+            <p className={`${playfairDisplay.className} text-xl md:text-2xl text-gray-700 mb-6`}>
+              We've designed our entertainment to create an unforgettable atmosphere where our loved ones can celebrate, connect, and create memories that will last a lifetime.
+            </p>
+            <div className="flex items-center justify-center gap-3">
+              <div className="w-12 h-12 rounded-full overflow-hidden relative">
+                <Image
+                  src="/kuna06.jpg"
+                  alt="Kuna & Kadeen"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="text-left">
+                <h4 className={`${montserrat.className} font-medium text-wedding-text-dark`}>Kuna & Kadeen</h4>
+                <p className={`${montserrat.className} text-sm text-gray-500`}>The Happy Couple</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
+
+      {/* Venue Information Section */}
+      <VenueInformation className="bg-white" />
+      
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* Dress Code & Guidelines Section */}
       <section className="py-32 bg-white relative overflow-hidden">
