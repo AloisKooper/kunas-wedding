@@ -1,44 +1,46 @@
-import { Playfair_Display, Montserrat, Sail, Great_Vibes } from 'next/font/google'
-import localFont from 'next/font/local'
+import { EB_Garamond, Sail, Great_Vibes, Montserrat, Playfair_Display } from 'next/font/google';
 
-// Using the original Playfair Display font
-export const playfairDisplay = Playfair_Display({
+// EB Garamond for body text, providing a classic, readable serif style
+export const ebGaramond = EB_Garamond({
+  weight: ['400', '500', '600', '700', '800'], // Offering a range of weights for stylistic flexibility
+  style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-playfair',
-  weight: ['400', '600'],  // Regular and Semi-bold weights
-  style: ['normal', 'italic']
-})
+  variable: '--font-eb-garamond',
+});
 
-// Using the original Montserrat font
+// Sail for decorative headings
+export const sail = Sail({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sail',
+});
+
+// Great Vibes for elegant, script-like text
+export const greatVibes = Great_Vibes({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-great-vibes',
+});
+
+// Montserrat for modern, clean text
 export const montserrat = Montserrat({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-montserrat',
-  weight: ['300'],  // 300 is light weight
-})
+});
 
-// Using Sail font from Google Fonts
-export const sail = Sail({
-  weight: '400',  // Sail only comes in regular weight
+// Playfair Display for sophisticated serif headings
+export const playfairDisplay = Playfair_Display({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-sail'
-})
-
-// Prints Charming font
-export const printsCharming = localFont({ 
-  src: './Prints Charming.ttf'
-})
-
-// Darline Script font
-export const darlineScript = localFont({ 
-  src: './Darline Script.otf'
-})
-
-// Great Vibes font
-export const greatVibes = Great_Vibes({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-})
+  variable: '--font-playfair-display',
+});

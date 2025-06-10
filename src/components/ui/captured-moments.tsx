@@ -47,7 +47,7 @@ export function CapturedMoments({
           <h2 className={`${greatVibes.className} text-[65px] text-wedding-text-dark mb-[-8px]`}>
             {title}
           </h2>
-          <p className="font-montserrat text-wedding-primary text-xl mb-12">
+          <p className="font-sans text-wedding-primary text-xl mb-12">
             {subtitle}
           </p>
         </motion.div>

@@ -7,7 +7,7 @@ export function ReservationButton() {
   return (
     <div className="inline-block">
       <HoverBorderGradient 
-        className="font-montserrat font-light text-[16px] text-white whitespace-nowrap bg-wedding-primary px-8 py-3"
+        className="font-sans font-light text-[16px] text-white whitespace-nowrap bg-wedding-primary px-8 py-3"
         containerClassName="border-none"
       >
         RESERVATION

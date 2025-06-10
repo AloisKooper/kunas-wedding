@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { FC } from 'react'
 import { motion, useScroll, useTransform, easeOut } from 'framer-motion'
 import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import { IconVolume, IconVolumeOff } from '@tabler/icons-react';
 import { useRef, useEffect, useState } from 'react'
-import { greatVibes, playfairDisplay, montserrat, printsCharming, darlineScript, sail } from '@/fonts/fonts'
+import { greatVibes, playfairDisplay, montserrat, sail } from '@/fonts/fonts'
 import dynamic from 'next/dynamic'
 import Footer from '@/components/Footer'
 
@@ -24,7 +24,7 @@ import { Label } from '@/components/ui/label'
 import { IconBrandInstagram, IconMail, IconBrandWhatsapp } from '@tabler/icons-react'
 import Link from 'next/link';
 
-export default function Home() {
+const Home: FC = () => {
   // --- Volume state and ref ---
   const [isMuted, setIsMuted] = useState(true);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
@@ -156,7 +156,7 @@ export default function Home() {
       content: (
         <div className="flex flex-col gap-2">
           <p className="font-montserrat text-white text-sm">Engagement Session</p>
-          <p className="font-playfair-display text-white text-2xl">The Beginning of Forever</p>
+          <p className="font-eb-garamond text-white text-2xl">The Beginning of Forever</p>
         </div>
       ),
       className: "h-[400px] md:col-span-2",
@@ -167,7 +167,7 @@ export default function Home() {
       content: (
         <div className="flex flex-col gap-2">
           <p className="font-montserrat text-white text-sm">Pre-Wedding</p>
-          <p className="font-playfair-display text-white text-2xl">Counting Down the Days</p>
+          <p className="font-eb-garamond text-white text-2xl">Counting Down the Days</p>
         </div>
       ),
       className: "h-[400px]",
@@ -178,7 +178,7 @@ export default function Home() {
       content: (
         <div className="flex flex-col gap-2">
           <p className="font-montserrat text-white text-sm">Love Story</p>
-          <p className="font-playfair-display text-white text-2xl">Written in the Stars</p>
+          <p className="font-eb-garamond text-white text-2xl">Written in the Stars</p>
         </div>
       ),
       className: "h-[400px]",
@@ -189,7 +189,7 @@ export default function Home() {
       content: (
         <div className="flex flex-col gap-2">
           <p className="font-montserrat text-white text-sm">Save the Date</p>
-          <p className="font-playfair-display text-white text-2xl">December 2025</p>
+          <p className="font-eb-garamond text-white text-2xl">December 2025</p>
         </div>
       ),
       className: "h-[400px] md:col-span-2",
@@ -200,7 +200,7 @@ export default function Home() {
       content: (
         <div className="flex flex-col gap-2">
           <p className="font-montserrat text-white text-sm">Engagement Photoshoot</p>
-          <p className="font-playfair-display text-white text-2xl">Celebrating Our Commitment</p>
+          <p className="font-eb-garamond text-white text-2xl">Celebrating Our Commitment</p>
         </div>
       ),
       className: "h-[400px] md:col-span-2",
@@ -211,7 +211,7 @@ export default function Home() {
       content: (
         <div className="flex flex-col gap-2">
           <p className="font-montserrat text-white text-sm">Soon-to-be</p>
-          <p className="font-playfair-display text-white text-2xl">Mr. & Mrs.</p>
+          <p className="font-eb-garamond text-white text-2xl">Mr. & Mrs.</p>
         </div>
       ),
       className: "h-[400px]",
@@ -1088,4 +1088,6 @@ export default function Home() {
       </div>
     </main>
   )
-}
+};
+
+export default Home;
