@@ -3,13 +3,12 @@ import { cookies } from 'next/headers';
 import RsvpClientPage from './RsvpClientPage';
 
 interface RsvpPageProps {
-  searchParams: {
-    inviteCode?: string;
-  };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export default async function RsvpPage({ searchParams }: RsvpPageProps) {
-  const { inviteCode } = searchParams;
+  const inviteCodeParam = searchParams?.inviteCode;
+  const inviteCode = Array.isArray(inviteCodeParam) ? inviteCodeParam[0] : inviteCodeParam;
   const supabase = createClient();
 
   let guestName = 'Valued Guest';
