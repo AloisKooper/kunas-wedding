@@ -4,8 +4,7 @@ import { cookies } from 'next/headers';
 import { rsvpSchema } from '@/lib/types';
 
 export async function POST(request: Request) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
 
   let body;
   try {
@@ -35,6 +34,8 @@ export async function POST(request: Request) {
     message,
     gift_preference,
     relationship_to_couple,
+    adult_count,
+    child_count,
   } = validated.data;
 
   if (!inviteCode) {
@@ -45,12 +46,37 @@ export async function POST(request: Request) {
     // 1. Find the invitation using the invite code
     const { data: invitation, error: inviteError } = await supabase
       .from('invitations')
-      .select('id')
+      .select('id, rsvp_deadline, allowed_guests')
       .eq('id', inviteCode)
       .single();
 
     if (inviteError || !invitation) {
       return NextResponse.json({ message: 'Invalid invitation code.' }, { status: 404 });
+    }
+
+    // Check 1: Validate RSVP deadline
+    const now = new Date();
+    const deadline = new Date(invitation.rsvp_deadline);
+
+    if (now > deadline) {
+      return NextResponse.json({ message: 'The deadline to RSVP for this event has passed.' }, { status: 403 });
+    }
+
+    // Check 2: Validate guest count against the invitation's allowance
+    if (attendance === 'yes') {
+      // This check satisfies TypeScript, although our Zod schema already ensures guestCount is present.
+      if (guestCount === undefined) {
+        return NextResponse.json({ message: 'Guest count is required when attending.' }, { status: 400 });
+      }
+
+      if (guestCount > invitation.allowed_guests) {
+        return NextResponse.json(
+          {
+            message: `Your invitation allows for a maximum of ${invitation.allowed_guests} guest(s). Please adjust your guest count.`,
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // 2. Create the RSVP entry
@@ -61,6 +87,8 @@ export async function POST(request: Request) {
       phone: phone,
       attending: attendance === 'yes',
       guest_count: attendance === 'yes' ? (guestCount ?? 1) : 0,
+      adult_count: attendance === 'yes' ? (adult_count ?? 1) : 0,
+      child_count: attendance === 'yes' ? (child_count ?? 0) : 0,
       dietary_restrictions: dietary,
       message: message,
       gift_preference: gift_preference,
