@@ -2,11 +2,11 @@ import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import RsvpClientPage from './RsvpClientPage';
 
-interface RsvpPageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default async function RsvpPage({ searchParams }: RsvpPageProps) {
+export default async function RsvpPage({ 
+  searchParams 
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   const inviteCodeParam = searchParams?.inviteCode;
   const inviteCode = Array.isArray(inviteCodeParam) ? inviteCodeParam[0] : inviteCodeParam;
   const supabase = createClient();
