@@ -1,15 +1,16 @@
 import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
 import RsvpClientPage from './RsvpClientPage';
 
-export default async function RsvpPage({ 
-  searchParams 
+export default async function RsvpPage({
+  searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const inviteCodeParam = searchParams?.inviteCode;
+  // Wait for searchParams to resolve
+  const resolvedSearchParams = await searchParams;
+  const inviteCodeParam = resolvedSearchParams?.inviteCode;
   const inviteCode = Array.isArray(inviteCodeParam) ? inviteCodeParam[0] : inviteCodeParam;
-  const supabase = createClient();
+  const supabase = await createClient();
 
   let guestName = 'Valued Guest';
   let validInviteCode: string | null = null;

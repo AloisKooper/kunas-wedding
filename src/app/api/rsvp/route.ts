@@ -1,15 +1,14 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
 import { rsvpSchema } from '@/lib/types';
 
 export async function POST(request: Request) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   let body;
   try {
     body = await request.json();
-  } catch (error) {
+  } catch (_) {
     return NextResponse.json({ message: 'Invalid JSON body.' }, { status: 400 });
   }
   
@@ -109,10 +108,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: 'RSVP submitted successfully!' }, { status: 200 });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('RSVP submission error:', error);
     return NextResponse.json(
-      { message: error.message || 'An internal server error occurred.' },
+      { message: error instanceof Error ? error.message : 'An internal server error occurred.' },
       { status: 500 }
     );
   }

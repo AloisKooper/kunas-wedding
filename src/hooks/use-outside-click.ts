@@ -1,10 +1,13 @@
-// @ts-nocheck - Temporarily disable TypeScript checking
 import { useEffect } from 'react'
-import type { RefObject } from 'react'
+
+// Define a type that matches the structure of React's RefObject without using the actual type
+interface RefObject<T> {
+  readonly current: T | null;
+}
 
 export const useOutsideClick = (
-  ref: RefObject<HTMLDivElement | null>,
-  callback: Function
+  ref: RefObject<HTMLElement>,
+  callback: () => void
 ) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
