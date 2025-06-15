@@ -11,7 +11,7 @@ export default async function RsvpPage({
   const resolvedSearchParams = await searchParams;
   const inviteCodeParam = resolvedSearchParams?.inviteCode;
   const inviteCode = Array.isArray(inviteCodeParam) ? inviteCodeParam[0] : inviteCodeParam;
-  const supabase = await createClient();
+  const supabase = createClient();
 
   let guestName = 'Valued Guest';
   let validInviteCode: string | null = null;
