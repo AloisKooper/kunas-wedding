@@ -4,9 +4,10 @@ import RsvpClientPage from './RsvpClientPage';
 export default async function RsvpPage({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  // As per Next.js 15, searchParams in async pages is a Promise
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  // Wait for searchParams to resolve
+  // Await the searchParams promise to resolve
   const resolvedSearchParams = await searchParams;
   const inviteCodeParam = resolvedSearchParams?.inviteCode;
   const inviteCode = Array.isArray(inviteCodeParam) ? inviteCodeParam[0] : inviteCodeParam;
@@ -18,23 +19,28 @@ export default async function RsvpPage({
   let deadlinePassed = false;
 
   if (inviteCode) {
-    const { data: invitation, error } = await supabase
-      .from('invitations')
-      .select('id, name, rsvp_deadline, allowed_guests')
-      .eq('id', inviteCode)
-      .single();
+    try {
+      const { data: invitation, error } = await supabase
+        .from('invitations')
+        .select('id, name, rsvp_deadline, allowed_guests')
+        .eq('id', inviteCode)
+        .single();
 
-    if (!error && invitation) {
-      const now = new Date();
-      const deadline = new Date(invitation.rsvp_deadline);
+      if (!error && invitation) {
+        const now = new Date();
+        const deadline = new Date(invitation.rsvp_deadline);
 
-      if (now > deadline) {
-        deadlinePassed = true;
-      } else {
-        guestName = invitation.name;
-        validInviteCode = inviteCode;
-        allowedGuests = invitation.allowed_guests ?? 1;
+        if (now > deadline) {
+          deadlinePassed = true;
+        } else {
+          guestName = invitation.name;
+          validInviteCode = inviteCode;
+          allowedGuests = invitation.allowed_guests ?? 1;
+        }
       }
+    } catch (error) {
+      console.error('Error fetching invitation:', error);
+      // Continue with default values if there's an error
     }
   }
 
