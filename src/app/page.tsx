@@ -9,6 +9,7 @@ import { useRef, useEffect, useState } from 'react'
 import { greatVibes, playfairDisplay, montserrat, sail } from '@/fonts/fonts'
 import dynamic from 'next/dynamic'
 import Footer from '@/components/Footer'
+import confetti from 'canvas-confetti';
 
 // Dynamically import heavy components
 const TextGenerateEffect = dynamic(() => import('@/components/ui/text-generate-effect'), { ssr: false })
@@ -72,12 +73,38 @@ const Home: FC = () => {
   useEffect(() => {
     setIsMounted(true)
     setWindowHeight(window.innerHeight)
-
     const handleResize = () => {
       setWindowHeight(window.innerHeight)
     }
-
     window.addEventListener('resize', handleResize)
+    
+    // Add confetti animation
+    if (typeof window !== 'undefined') {
+      const end = Date.now() + (8 * 1000);
+      const colors = ['#bb0000', '#ffffff'];
+      
+      (function frame() {
+        confetti({
+          particleCount: 2,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: colors
+        });
+        confetti({
+          particleCount: 2,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: colors
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+    
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
@@ -246,8 +273,8 @@ const Home: FC = () => {
               preload="auto"
               style={{ pointerEvents: 'none' }}
             />
-            {/* Optional: overlays for darkening/text contrast */}
-            <div className="absolute inset-0 bg-black/30" />
+            {/* Optional: overlays for darkening/text contrast - made slightly darker */}
+            <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/40" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40" />
             {/* Volume Button */}
@@ -292,14 +319,14 @@ const Home: FC = () => {
                 </motion.div>
               </div>
               <div className="relative flex flex-col items-center justify-center mt-2 mb-2">
-  {/* Decorative Accent */}
-  <Image src="/Flower.svg" alt="Decorative Accent" width={72} height={24} className="mx-auto mb-2" />
-  <div className={`text-center text-[44px] xs:text-[60px] sm:text-[80px] md:text-[100px] lg:text-[110px] leading-none tracking-[0.09em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.2)]`} style={{textShadow:'0 2px 8px rgba(0,0,0,0.18)'}}>
-    <motion.div variants={textVariants}>
-      <span className={greatVibes.className}>Kuna</span> <span className={`${playfairDisplay.className} text-wedding-primary`}>&</span> <span className={greatVibes.className}>Kadeen</span>
-    </motion.div>
-  </div>
-</div>
+                {/* Decorative Accent */}
+                <Image src="/Flower.svg" alt="Decorative Accent" width={72} height={24} className="mx-auto mb-2" />
+                <div className={`text-center text-[44px] xs:text-[60px] sm:text-[80px] md:text-[100px] lg:text-[110px] leading-none tracking-[0.09em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.2)]`} style={{ textShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>
+                  <motion.div variants={textVariants}>
+                    <span className={greatVibes.className}>Kuna</span> <span className={`${playfairDisplay.className} text-wedding-primary`}>&</span> <span className={greatVibes.className}>Kadeen</span>
+                  </motion.div>
+                </div>
+              </div>
               <div className="mt-2 text-center font-montserrat text-[16px] sm:text-[20px] md:text-[25px] font-normal leading-none">
                 <motion.div
                   variants={textVariants}

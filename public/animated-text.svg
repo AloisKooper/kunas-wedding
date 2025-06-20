@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <path fill="none" stroke="#c29c5e" stroke-width="2" d="M20,50 Q50,20 80,50 T140,50 T200,50 T260,50 T320,50" />
+  <path fill="none" stroke="#c29c5e" stroke-width="2" d="M20,70 Q50,40 80,70 T140,70 T200,70 T260,70 T320,70" />
+  <path fill="none" stroke="#c29c5e" stroke-width="2" d="M50,30 L50,90" />
+  <path fill="none" stroke="#c29c5e" stroke-width="2" d="M200,30 L200,90" />
+  <path fill="none" stroke="#c29c5e" stroke-width="2" d="M350,30 L350,90" />
+</svg> 

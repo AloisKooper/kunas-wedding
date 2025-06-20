@@ -4,10 +4,11 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient'
 import { playfairDisplay } from '@/fonts/fonts'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const NavItem = ({ text, variant }: { text: string; variant: boolean }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const href = text === 'HOME' ? '/' : `/${text.toLowerCase().replace(' ', '-')}`
+  const href = text === 'HOME' ? '/' : `/${text.toLowerCase().replace(/ /g, '-')}`
 
   return (
     <Link href={href}>
@@ -87,18 +88,33 @@ export default function Navbar() {
         isScrolled ? 'bg-white/95 backdrop-blur-sm' : 'backdrop-blur-sm'
       }`}
     >
-      <div className="relative px-[48px] py-6">
+      <div className="relative px-4 md:px-[48px] py-3 md:py-6 flex items-center justify-center md:justify-start">
         {/* Logo */}
-        <div className={`${playfairDisplay.className} text-[50px] uppercase tracking-[0.1em] text-center md:absolute md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 ${
-          isScrolled ? 'text-wedding-text-dark' : 'text-white'
-        }`}>
-          <span className="font-semibold italic">K</span>
-          <span className="text-wedding-primary font-semibold italic">&</span>
-          <span className="font-semibold italic">K</span>
+        <div className={`text-[50px] uppercase tracking-[0.1em] text-center md:absolute md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2`}>
+          <Link href="/">
+                                                                                    <div className="relative w-[110px] h-[60px] scale-[2.75] md:w-[240px] md:h-[150px] md:scale-100">
+              <Image
+                src="/kuna white on black (2).png"
+                alt="K&K Logo"
+                fill
+                style={{ objectFit: 'contain' }}
+                className={`transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`}
+                priority
+              />
+              <Image
+                src="/kuna black on white.png"
+                alt="K&K Logo"
+                fill
+                style={{ objectFit: 'contain' }}
+                className={`transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
+                priority
+              />
+            </div>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex justify-end gap-10">
+        <div className="hidden md:flex justify-end gap-10 w-full">
           {navItems.map((item) => (
             <NavItem key={item} text={item} variant={isScrolled} />
           ))}
@@ -107,7 +123,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`md:hidden absolute right-[48px] top-7 ${
+          className={`md:hidden absolute right-4 top-4 ${
             isScrolled ? 'text-wedding-text-dark' : 'text-white'
           }`}
         >

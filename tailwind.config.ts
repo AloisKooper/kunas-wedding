@@ -1,100 +1,70 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
+const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
+ 
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
-const config = {
-  darkMode: ['class'],
+const config: Config = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  prefix: '',
   theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
-    },
     extend: {
-      colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-        parchment: 'hsl(var(--parchment))',
-        'sepia-text': 'hsl(var(--sepia-text))',
-        'faded-gold': {
-          DEFAULT: 'hsl(var(--faded-gold))',
-          hover: 'hsl(var(--faded-gold-hover))',
-        },
-        'sepia-border': 'hsl(var(--sepia-border))',
-        'parchment-text-on-gold': 'hsl(var(--parchment-text-on-gold))',
-        // Add your Kunas Wedding specific theme colors here if they are not CSS variables
-        // For example:
-        // 'wedding-primary': '#C19875', // Example color
-        // 'wedding-text-dark': '#333333', // Example color
-        // 'wedding-text-light': '#777777', // Example color
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
       fontFamily: {
-        sans: ['var(--font-montserrat)', 'sans-serif'], // Assuming Montserrat is your main sans-serif
-        serif: ['var(--font-eb-garamond)', 'serif'], // Assuming EB Garamond is your main serif
-        greatvibes: ['var(--font-great-vibes)'],
-        playfair: ['var(--font-playfair-display)'],
-        sail: ['var(--font-sail)'],
+        'playfair-display': ['var(--font-playfair)'],
+        'montserrat': ['var(--font-montserrat)'],
+        'cormorant': ['var(--font-cormorant)'],
+        'great-vibes': ['var(--font-great-vibes)'],
+        'sail': ['var(--font-sail)'],
       },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
+      boxShadow: {
+        input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
+      },
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        wedding: {
+          primary: '#C37200',  // The ampersand color
+          section: {
+            light: '#fdf8f2',  // Primary section background
+            alternate: '#FFFFFF',  // Alternate section background
+          },
+          text: {
+            dark: '#2C1810',  // Main text color for sections
+          }
+        }
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
-} satisfies Config;
+  plugins: [
+    addVariablesForColors,
+    plugin(function ({ addComponents, theme }: any) {
+      addComponents({
+        '.bg-wedding-section-light, .bg-wedding-section-alternate': {
+          'background-image': 'radial-gradient(circle at top left, rgba(44,24,16,0.05) 0%, transparent 35%), radial-gradient(circle at top right, rgba(44,24,16,0.05) 0%, transparent 35%), radial-gradient(circle at bottom left, rgba(44,24,16,0.05) 0%, transparent 35%), radial-gradient(circle at bottom right, rgba(44,24,16,0.05) 0%, transparent 35%)',
+        },
+      });
+    }),
+  ],
+};
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
+}
 
 export default config;
